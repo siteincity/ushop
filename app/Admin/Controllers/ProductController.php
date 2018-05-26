@@ -24,8 +24,8 @@ class ProductController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Все товары');
+            $content->description('');
 
             $content->body($this->grid());
         });
@@ -73,10 +73,17 @@ class ProductController extends Controller
     {
         return Admin::grid(Product::class, function (Grid $grid) {
 
-            $grid->id('ID')->sortable();
+            // Columns:
+            $grid->id('id')->sortable();
+            $grid->column('title','Наименование')->display(function ($title) {
+                return '<a href="products/'.$this->id.'/edit">'.$title.'</a>';
+            });
 
-            $grid->created_at();
-            $grid->updated_at();
+            // Filter:
+            $grid->filter(function($filter) {
+                $filter->like('title', 'Наименование');
+            });
+
         });
     }
 
@@ -90,9 +97,9 @@ class ProductController extends Controller
         return Admin::form(Product::class, function (Form $form) {
 
             $form->display('id', 'ID');
-
-            $form->display('created_at', 'Created At');
-            $form->display('updated_at', 'Updated At');
+            $form->text('title', 'Наименование');
+            $form->radio('published', 'Паблик?')->options([1 => 'Да', 0 => 'Нет'])->default(1)->stacked();
+ 
         });
     }
 }
