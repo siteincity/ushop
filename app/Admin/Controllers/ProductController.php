@@ -41,10 +41,18 @@ class ProductController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            // Form:
+            $form = $this->form()->edit($id);
+            $model = $form->model();
 
-            $content->body($this->form()->edit($id));
+            $content->header('Редактор товаров');
+
+            $content->breadcrumb(
+                ['text' => 'Товары', 'url' => '/products'],
+                ['text'=> 'ID['.$model->id.']']
+            );
+
+            $content->body($form->setTitle($model->title));
         });
     }
 
@@ -57,8 +65,12 @@ class ProductController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Новый товар');
+
+            $content->breadcrumb(
+                ['text' => 'Товары', 'url' => '/products'],
+                ['text'=> 'Добавление товара']
+            );
 
             $content->body($this->form());
         });
@@ -96,9 +108,26 @@ class ProductController extends Controller
     {
         return Admin::form(Product::class, function (Form $form) {
 
-            $form->display('id', 'ID');
-            $form->text('title', 'Наименование');
-            $form->radio('published', 'Паблик?')->options([1 => 'Да', 0 => 'Нет'])->default(1)->stacked();
+
+            // Tab:Default
+            $form->tab('Общее', function ($form) {
+
+                $form->text('title', 'Наименование');
+                // $form->divider();
+                $form->switch('published', 'Публиковать?')->states([
+                    'on'  => ['value' => 1, 'text' => 'Да', 'color' => 'success'], 
+                    'off' => ['value' => 0, 'text' => 'Нет', 'color' => 'danger'],
+                ])->default(1);     
+
+            });
+
+            // Tab:Attributes
+            $form->tab('Характеристики', function ($form) {
+
+                       
+
+            });
+ 
  
         });
     }
