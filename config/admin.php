@@ -5,17 +5,17 @@ return [
     /*
      * Laravel-admin name.
      */
-    'name' => 'Laravel-admin',
+    'name' => 'UShop',
 
     /*
      * Logo in admin panel header.
      */
-    'logo' => '<b>Laravel</b> admin',
+    'logo' => '<b>EVA</b> shop',
 
     /*
      * Mini-logo in admin panel header.
      */
-    'logo-mini' => '<b>La</b>',
+    'logo-mini' => '<b>EVA</b>',
 
     /*
      * Route configuration.
@@ -129,7 +129,7 @@ return [
     /*
      * @see https://adminlte.io/docs/2.4/layout
      */
-    'skin' => 'skin-blue-light',
+    'skin' => 'skin-black',
 
     /*
     |---------------------------------------------------------|
@@ -140,7 +140,7 @@ return [
     |               | sidebar-mini                            |
     |---------------------------------------------------------|
      */
-    'layout' => ['sidebar-mini', 'sidebar-collapse'],
+    'layout' => ['sidebar-mini','fixed'],
 
     /*
      * Version displayed in footer.
