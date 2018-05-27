@@ -11,6 +11,25 @@
 |
 */
 
+use Illuminate\Routing\Router;
+
+Route::group([
+    
+    'prefix'        => 'admin',
+    'namespace'     => 'App\\Admin\\Controllers',
+    'middleware'    => ['web'], // Must be ['web', 'admin'] admin middleware (auth and etc...)
+
+], function (Router $router) {
+    
+    $router->get('/test', function () {
+    	return view('welcome');	
+    });
+    
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
