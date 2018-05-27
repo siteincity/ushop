@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Attribute;
+use App\Group;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -24,8 +25,13 @@ class AttributeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Характеристики');
+            $content->description('товаров');
+
+            // Breadcrumbs:
+            $content->breadcrumb(
+                ['text' => 'Характеристики']
+            );
 
             $content->body($this->grid());
         });
@@ -41,8 +47,7 @@ class AttributeController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Редактирование характеристики');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +62,7 @@ class AttributeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Новая характеристика');
 
             $content->body($this->form());
         });
@@ -73,10 +77,19 @@ class AttributeController extends Controller
     {
         return Admin::grid(Attribute::class, function (Grid $grid) {
 
-            $grid->id('ID')->sortable();
+            // Columns:
+            $grid->id('id')->sortable();
+            $grid->column('caption','Название')->display(function ($title) {
+                return '<a href="attributes/'.$this->id.'/edit">'.$title.'</a>';
+            });
+            $grid->column('type','Тип')->sortable();
+            $grid->column('slug','Системное имя')->sortable();
 
-            $grid->created_at();
-            $grid->updated_at();
+            // Filter:
+            $grid->filter(function($filter) {
+                $filter->like('type', 'Тип');
+                $filter->like('slug', 'Системное имя');
+            });
         });
     }
 
@@ -90,9 +103,13 @@ class AttributeController extends Controller
         return Admin::form(Attribute::class, function (Form $form) {
 
             $form->display('id', 'ID');
-
-            $form->display('created_at', 'Created At');
-            $form->display('updated_at', 'Updated At');
+            $form->text('caption', 'Название')->rules('required');
+            $form->select('type', 'Тип')->options(['text','select','checkbox','radio','color','number','image','file']);
+            $form->text('slug', 'Системное имя');
+            $form->multipleSelect('group', 'Группы')
+                ->options(Group::all()->pluck('title','id'))
+                ->rules('required');
+            
         });
     }
 }

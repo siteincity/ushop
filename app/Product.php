@@ -29,4 +29,14 @@ class Product extends Model
         return $this->belongsToMany('App\Attribute', 'product_attributes')->withPivot('value');
     }
 
+    /**
+     * Relation to Group
+     *
+     * @return obj 
+     **/
+    public function group()
+    {
+        return $this->hasOne('App\Group');
+    }
+
 }

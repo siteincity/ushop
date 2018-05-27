@@ -35,37 +35,5 @@ class DashboardController extends Controller
     }
 
 
-    // public function old_index()
-    // {
-    //     return Admin::content(function (Content $content) {
-
-    //         $title = 'Dashboard';
-    //         $description = '';
-
-    //         $content->header($title);
-    //         $content->description($description);
-
-    //         //$content->row(Dashboard::title());
-
-    //         $content->breadcrumb(
-    //             ['text' => $header]
-    //         );
-
-    //         $content->row(function (Row $row) {
-
-    //             // $row->column(4, function (Column $column) {
-    //             //     $column->append(Dashboard::environment());
-    //             // });
-
-    //             // $row->column(4, function (Column $column) {
-    //             //     $column->append(Dashboard::extensions());
-    //             // });
-
-    //             // $row->column(4, function (Column $column) {
-    //             //     $column->append(Dashboard::dependencies());
-    //             // });
-
-    //         });
-    //     });
-    // }
+   
 }

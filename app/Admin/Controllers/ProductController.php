@@ -24,8 +24,13 @@ class ProductController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('Все товары');
-            $content->description('');
+            $content->header('Tовары');
+            $content->description('Все');
+
+            // Breadcrumbs:
+            $content->breadcrumb(
+                ['text' => 'Товары']
+            );
 
             $content->body($this->grid());
         });
@@ -47,6 +52,7 @@ class ProductController extends Controller
 
             $content->header('Редактор товаров');
 
+            // Breadcrumbs:
             $content->breadcrumb(
                 ['text' => 'Товары', 'url' => '/products'],
                 ['text'=> 'ID['.$model->id.']']
@@ -67,6 +73,7 @@ class ProductController extends Controller
 
             $content->header('Новый товар');
 
+            // Breadcrumbs:
             $content->breadcrumb(
                 ['text' => 'Товары', 'url' => '/products'],
                 ['text'=> 'Добавление товара']

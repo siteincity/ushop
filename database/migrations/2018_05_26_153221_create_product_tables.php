@@ -18,6 +18,7 @@ class CreateProductTables extends Migration
         Schema::create('products', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->unsignedInteger('group_id')->default(1); // Product Group ID
             $table->string('title')->index(); // Required
             // $table->string('longtitle')->default('');
             // $table->text('description')->nullable();
@@ -61,6 +62,18 @@ class CreateProductTables extends Migration
             $table->text('value')->nullable(); // Value
         });
 
+        // Table Types:
+        Schema::create('groups', function (Blueprint $table) {    
+            $table->increments('id'); // Primary Key:
+            $table->string('title')->default(''); // Type Title
+        });
+
+        // Table product_types:
+        Schema::create('group_attributes', function (Blueprint $table) {    
+            $table->unsignedInteger('group_id');  // Type 
+            $table->unsignedInteger('attribute_id'); // Attribute
+        });
+
 
     }
 
@@ -74,5 +87,7 @@ class CreateProductTables extends Migration
         Schema::dropIfExists('products');
         Schema::dropIfExists('attributes');
         Schema::dropIfExists('product_attributes');
+        Schema::dropIfExists('groups');
+        Schema::dropIfExists('group_attributes');
     }
 }

@@ -13,5 +13,6 @@ Route::group([
     $router->get('/', 'DashboardController@index');
     $router->resource('/products', ProductController::class);
     $router->resource('/attributes', AttributeController::class);
+    $router->resource('/groups', GroupController::class);
 
 });
