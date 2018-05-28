@@ -14,11 +14,14 @@ Route::group([
     	return view('welcome');	
     });
     $router->get('/', 'DashboardController@index')->name('home');
-    $router->resource('/products', ProductController::class, [
+    $router->resource('/product', ProductController::class, [
     	'names' => [
-	        'index' => 'products',
-	        'create' => 'products.create',
-	        'store' => 'products.store',
+	        'index' => 'product',
+	        'create' => 'product.create',
+            'store' => 'product.store',
+            'edit' => 'product.edit',
+	        'update' => 'product.update',
+            'destroy' => 'product.destroy',
     	]
     ]);
     

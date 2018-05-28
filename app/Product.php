@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,6 +26,7 @@ class Product extends Model
      **/
     public function attributes()
     {
+        
         return $this->belongsToMany('App\Attribute', 'product_attributes')->withPivot('value');
     }
 
@@ -36,7 +37,22 @@ class Product extends Model
      **/
     public function group()
     {
+        
         return $this->hasOne('App\Group');
     }
+
+    /**
+     * Deleter
+     *
+     * @return obj 
+     **/
+    public function destroyer($id)
+    {
+        
+        $this->destroy($id);
+    }
+
+
+    
 
 }

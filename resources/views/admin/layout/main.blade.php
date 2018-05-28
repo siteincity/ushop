@@ -42,8 +42,8 @@
 
                 {{-- ActionMenu --}}
                 <ul class="nav-main">
-                    <li class="active"><a href="{{ route('home') }}"><i class="fa fa-tachometer-alt"></i> Панель управления</a></li>
-                    <li><a href="{{ route('products.create') }}"><i class="fa fa-indent"></i> Товары</a></li>
+                    <li><a href="{{ route('home') }}"><i class="fa fa-tachometer-alt"></i> Панель управления</a></li>
+                    <li class="active"><a href="{{ route('product') }}"><i class="fa fa-indent"></i> Товары</a></li>
                     <li><a href="{{ route('home') }}"><i class="fa fa-folder-open"></i> Категории</a></li>
                     <li><a href="{{ route('home') }}"><i class="fa fa-project-diagram"></i> Характеристики</a></li>
                     <li><a href="{{ route('home') }}"><i class="fa fa-file-alt"></i> Страницы</a></li>
@@ -92,15 +92,18 @@
     <div class="wrapper">
         <div class="col-right">
             
-            <div class="app-action-title">
+            <div class="app-action-title row no-gutters justify-content-between"> 
                 <h3>
                     @yield('title') 
                     <small>
                         @yield('title-description')
                     </small>
-                </h3>    
+                </h3>
+                <div>
+                    @yield('actions-title')   
+                </div> 
             </div>
-
+            
             @yield('content') 
                     
         </div>  
@@ -109,15 +112,18 @@
     
 
 
-    
-
-    
-
-
+    <script>
+        var _token = "{{ csrf_token() }}";
+        var _current_url = "{{ Request::url() }}";
+        var _current_url_full = "{{ Request::fullUrl() }}";
+    </script>
     <script src="vendor/admin-ui/js/jquery.js"></script>
     <script src="vendor/admin-ui/js/popper.js"></script>    
     <script src="vendor/admin-ui/js/bootstrap.js"></script>
     <script src="vendor/admin-ui/js/app.js"></script>
+    @yield('js')
+
+    
     
 </body>
 </html>

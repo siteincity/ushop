@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     
 
-    const PRODUCTS_PER_PAGE = 6;
+    const PRODUCTS_PER_PAGE = 20;
 
     
     protected $product;
@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         $products = $this->product->paginate(self::PRODUCTS_PER_PAGE);
         
-        return view('product.list', ['products' => $products]);    
+        return view('admin.product.index', ['products' => $products]);    
     }
 
     /**
@@ -40,7 +40,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create', ['product' => $this->product]);
+        
+        return view('admin.product.edit');
     }
 
     /**
@@ -51,9 +52,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $this->product->create($request->all());
-        return back();
+        
+        return redirect(route('product'));
     }
 
     /**
@@ -62,10 +63,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
 
-        return view('product.show', ['product'=> $this->product->findBySlug($slug)]);
+        return view('product.show', ['product'=> $this->product->find($id)]);
     }
 
     /**
@@ -76,7 +77,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        return view('admin.product.edit', ['product'=> $this->product->find($id)]);
     }
 
     /**
@@ -87,8 +89,10 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {    
+        $this->product->find($id)->update($request->all());
+        
+        return redirect(route('product'));
     }
 
     /**
@@ -99,6 +103,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->product->destroyer($id);
+
+        // return back();
+        return;    
     }
+
+
 }

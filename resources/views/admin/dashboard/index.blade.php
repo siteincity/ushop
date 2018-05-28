@@ -16,7 +16,7 @@
 			test
 		</div>
 		<div class="card-body">
-			body
+			@include('admin.widget.table', ['some' => 'data'])
 		</div>
 	</div>                
 	                
