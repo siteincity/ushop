@@ -15,6 +15,11 @@
 				{{ Form::label('title', 'Наименование') }}
 				{{ Form::text('title', null, ['class' => 'form-control']) }}	
 			</div>
+			
+			<div class="form-group">
+				{{ Form::label('published', 'Публикация') }}
+				{{ Form::checkbox('published', '1', true) }}	
+			</div>
 
 			<div class="form-group">
 				{{ Form::button('Сохранить', ['type'=>'submit','class' => 'btn btn-danger']) }}	

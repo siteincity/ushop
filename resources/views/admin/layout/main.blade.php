@@ -99,9 +99,7 @@
                         @yield('title-description')
                     </small>
                 </h3>
-                <div>
-                    @yield('actions-title')   
-                </div> 
+                @yield('title-actions') 
             </div>
             
             @yield('content') 

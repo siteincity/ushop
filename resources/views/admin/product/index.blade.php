@@ -3,7 +3,7 @@
 {{-- Title --}}
 @section('title') Управление товарами  @endsection
 @section('title-description') Все товары @endsection
-@section('actions-title')
+@section('title-actions')
 	<a href="{{ route('product.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Новый товар</a>
 @endsection
 
