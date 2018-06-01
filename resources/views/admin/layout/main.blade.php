@@ -10,9 +10,11 @@
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <base href="/">
-    <link href="vendor/admin-ui/css/bootstrap.css" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    {{-- <link href="vendor/admin-ui/css/bootstrap.css" rel="stylesheet" /> --}}
+    <link href="vendor/admin-ui/css/font-awesome.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i&amp;subset=cyrillic" rel="stylesheet"> 
+    @yield('css') 
+    <link href="vendor/admin-ui/css/theme.material.css" rel="stylesheet" />
     <link href="vendor/admin-ui/css/app.css" rel="stylesheet" />
 </head>
 <body class="dark">
@@ -99,13 +101,17 @@
                         @yield('title-description')
                     </small>
                 </h3>
-                @yield('title-actions') 
+                <div class="btn-group-sm">
+                    @yield('title-actions')     
+                </div>
             </div>
-            
+                
             @yield('content') 
                     
         </div>  
     </div>
+
+
 
     
 
@@ -115,9 +121,10 @@
         var _current_url = "{{ Request::url() }}";
         var _current_url_full = "{{ Request::fullUrl() }}";
     </script>
-    <script src="vendor/admin-ui/js/jquery.js"></script>
-    <script src="vendor/admin-ui/js/popper.js"></script>    
-    <script src="vendor/admin-ui/js/bootstrap.js"></script>
+    {{-- <script src="vendor/admin-ui/js/jquery.js"></script> --}}
+    {{-- <script src="vendor/admin-ui/js/popper.js"></script>     --}}
+    {{-- <script src="vendor/admin-ui/js/bootstrap.js"></script> --}}
+    <script src="vendor/admin-ui/js/theme.material.js"></script>
     <script src="vendor/admin-ui/js/app.js"></script>
     @yield('js')
 

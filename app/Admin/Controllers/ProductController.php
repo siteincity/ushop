@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        return view('product.show', ['product'=> $this->product->find($id)]);
+        return 'product.show - ' . $id;
     }
 
     /**
@@ -91,8 +91,8 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {    
         $this->product->find($id)->update($request->all());
-        
-        return redirect(route('product'));
+        // dd($request);
+        return back();
     }
 
     /**
@@ -101,13 +101,21 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($ids)
     {
-        $this->product->destroyer($id);
-
-        // return back();
-        return;    
+        try {    
+            $this->product->destroy($ids);
+            return response()->json([
+                'type' => 'success',
+                'ids' => $ids
+            ]);
+        } catch (Exception $e) {
+            return json_encode($e->getMessage());
+        }  
     }
+
+
+    
 
 
 }

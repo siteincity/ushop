@@ -8,7 +8,15 @@
 	@if (isset($product))
 		{{-- Action Desc --}}	
 		@section('title-description') Редактор @endsection
-		{{ Form::model($product, ['route' => ['product.update', $product->id], 'method'=>'PUT']) }}
+		@section('title-actions')
+			<a href="{{ route('product.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Новый товар</a>
+			<button type="button" 
+				class="btn btn-danger btn-delete" 
+				data-url="{{ route('product.destroy', ['id' => $product->id]) }}">
+				<i class="fa fa-minus-circle"></i> Удалить
+			</button>
+		@endsection
+		{{ Form::model($product, ['route' => ['product.update', $product->id], 'method'=>'POST']) }}
 	@else
 		{{-- Action Desc --}}
 		@section('title-description') Новый товар @endsection
@@ -19,5 +27,24 @@
 
 	{{ Form::close() }}
 
+@endsection
+
+
+{{-- JS:Code --}}
+@section('js')	
+	<script>
+		$(function(){
+
+			$('.btn-delete').appButtonDelete({
+				token: _token,
+				success: function(response) {
+					if (response.type == 'success') {
+						window.location.href = '{{ route('product') }}'   
+					}
+				}
+			});
+
+		})
+	</script>	
 @endsection
 

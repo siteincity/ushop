@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     /*
      * Description.
      */
@@ -14,36 +14,33 @@ return [
      * Route configuration.
      */
     'route' => [
+        'file' => base_path() . '/routes/admin.php',
         'prefix' => 'admin',
         'namespace' => 'App\\Admin\\Controllers',
         'middleware' => ['web'], // Must be ['web', 'admin'] admin middleware (auth and etc...)
     ],
-    
+
     /*
-     * Laravel-admin install directory.
+     * Admin install directory.
      */
     'directory' => [
         'admin' => app_path('Admin'),
-        'routes' => base_path().'/routes',
     ],
 
-    
-
     /*
-     * Laravel-admin upload setting.
+     * Admin upload setting.
      */
     'upload' => [
         'disk' => 'admin',
         'directory' => [
             'image' => 'images',
-            'file'  => 'files',
+            'file' => 'files',
         ],
     ],
-    
-    
+
     /*
      * Version.
      */
     'version' => '1.0',
-    
+
 ];

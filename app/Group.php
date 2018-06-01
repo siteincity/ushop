@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    
+
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
     /**
@@ -15,17 +18,16 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 
+        'title',
     ];
 
+
     /**
-     * undocumented function
-     *
-     * @return void 
-     **/
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class,  'group_attributes');
+        return $this->belongsToMany(Attribute::class, 'group_attributes');
     }
 
 }

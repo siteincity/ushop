@@ -16,8 +16,8 @@ class AdminServiceProvider extends ServiceProvider
     {
         
         // Load admin routes
-        if (file_exists($routes = config('admin.directory.routes') . '/admin.php')) {
-            $this->loadRoutesFrom($routes);
+        if (file_exists($router = config('admin.route.file'))) {
+            $this->loadRoutesFrom($router);
         }
 
     }

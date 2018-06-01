@@ -10,18 +10,18 @@
 
 @section('content')
 
-	<section class="app-section app-grid">
+	<section class="app-section">
 
-		<div class="app-grid-actions">
+		{{-- <div class="app-grid-actions">
 			<div class="btn-group">
 				{{ Form::button('Удалить', ['type'=>'submit','class' => 'btn btn-danger btn-sm']) }}	
 			</div>
-		</div>
+		</div> --}}
 		
-		<table class="table app-grid">
+		<table class="table app-grid app-grid__product">
 			<thead>
 				<tr>
-					<th><input type="checkbox" name="" value="111"></th>
+					<th>all</th>
 					<th>ID</th>
 					<th>Наименование</th>
 					<th>Action</th>
@@ -31,16 +31,12 @@
 
 			{{-- list --}}
 			@foreach ($products as $product)
-				<tr>
-					<td><input type="checkbox" name="product_id[]" value="{{ $product->id }}"></td>
+				<tr id="row_{{ $product->id }}">
+					<td>cb</td>
 					<td>{{ $product->id }}</td>
 					<td><a href="{{ route('product.edit', $product->id) }}">{{ $product->title }}</a></td>
-					<td>
-						<div class="btn-group">
-							<button class="btn btn-delete btn-danger btn-sm" type="button" data-id="{{ $product->id }}">
-								<i class="fa fa-minus-circle"></i>
-							</button>	
-						</div>
+					<td>	
+						<button type="button" class="btn btn-danger btn-sm" data-url="{{ route('product.destroy', ['id' => $product->id]) }}"><i class="fa fa-minus-circle"></i></button>	
 					</td>
 				</tr>
 			@endforeach	
@@ -50,12 +46,28 @@
 		</table>
 		
 		{{ $products->render() }}
-
+               
 	</section>
 	
 @endsection
 
+
+
 {{-- JS:Code --}}
-@section('js')
-		
+@section('js')	
+	<script>
+		$(function(){
+
+			$('.app-grid__product .btn-danger').appButtonDelete({
+				token: _token,
+				success: function(response) {
+					if (response.type == 'success') {
+						$('.app-grid__product #row_' + response.ids).remove();
+						$.appMessage('Товар ' + response.ids + ' удален');    
+					}
+				}
+			});
+
+		})
+	</script>	
 @endsection

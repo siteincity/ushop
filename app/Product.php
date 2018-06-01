@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Product
+ * @package App
+ */
 class Product extends Model
 {
 
@@ -13,46 +17,40 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'title',  
+        'title',
         //'slug', 
         //'articul',
         //'price',
     ];
 
+
     /**
-     * Relation to Attribute
+     * The number of models to return for pagination.
      *
-     * @return obj 
-     **/
+     * @var int
+     */
+    protected $perPage = 15;
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function attributes()
     {
-        
+
         return $this->belongsToMany('App\Attribute', 'product_attributes')->withPivot('value');
     }
 
+
     /**
-     * Relation to Group
-     *
-     * @return obj 
-     **/
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function group()
     {
-        
+
         return $this->hasOne('App\Group');
     }
 
-    /**
-     * Deleter
-     *
-     * @return obj 
-     **/
-    public function destroyer($id)
-    {
-        
-        $this->destroy($id);
-    }
 
-
-    
 
 }

@@ -14,3 +14,4 @@ yarn-error.log
 .notepad
 *.sublime-project
 /trash
+/nbproject
