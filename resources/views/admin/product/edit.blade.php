@@ -35,6 +35,8 @@
 	<script>
 		$(function(){
 
+			$('.app-input__select').material_select();
+			
 			$('.btn-delete').appButtonDelete({
 				token: _token,
 				success: function(response) {

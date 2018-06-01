@@ -91,7 +91,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {    
         $this->product->find($id)->update($request->all());
-        // dd($request);
+
         return back();
     }
 

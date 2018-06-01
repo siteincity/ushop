@@ -24,6 +24,7 @@
 					<th>all</th>
 					<th>ID</th>
 					<th>Наименование</th>
+					<th>Опубликовано?</th>
 					<th>Action</th>
 				</tr>	
 			</thead>
@@ -35,6 +36,7 @@
 					<td>cb</td>
 					<td>{{ $product->id }}</td>
 					<td><a href="{{ route('product.edit', $product->id) }}">{{ $product->title }}</a></td>
+					<td>{{ $product->published ? 'Да' : 'Нет' }}</td>
 					<td>	
 						<button type="button" class="btn btn-danger btn-sm" data-url="{{ route('product.destroy', ['id' => $product->id]) }}"><i class="fa fa-minus-circle"></i></button>	
 					</td>

@@ -18,9 +18,14 @@ class Product extends Model
      */
     protected $fillable = [
         'title',
+        'published',
         //'slug', 
         //'articul',
         //'price',
+    ];
+
+    protected $attributes = [
+        'published' => 1,    
     ];
 
 
@@ -32,14 +37,19 @@ class Product extends Model
     protected $perPage = 15;
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function attributes()
-    {
+    // /**
+    //  * Update the model in the database.
+    //  *
+    //  * @param  array  $attributes
+    //  * @param  array  $options
+    //  * @return bool
+    //  */
+    // public function update(array $attributes = [], array $options = [])
+    // {
+    //     $attributes['published'] = isset($attributes['published']) ? $attributes['published'] : 0;
 
-        return $this->belongsToMany('App\Attribute', 'product_attributes')->withPivot('value');
-    }
+    //     parent::update($attributes,$options);
+    // }
 
 
     /**
