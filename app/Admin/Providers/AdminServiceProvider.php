@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace App\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Group;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -14,12 +15,9 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
-        // Load admin routes
-        if (file_exists($router = config('admin.route.file'))) {
-            $this->loadRoutesFrom($router);
-        }
 
+        // Load admin routes
+        $this->loadRoutesFrom(config('admin.route.file'));
     }
 
     /**
@@ -29,6 +27,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
+        $this->app->register(ComposerServiceProvider::class);
     }
 }

@@ -10,6 +10,16 @@ return [
     'logo-mini' => '<b>EVA</b>',
     'title' => 'Admin',
 
+
+    /*
+     * Admin install directory.
+     */
+    'directory' => [
+        'admin' => app_path('Admin'),
+        // 'views' => base_path() . '/resources/views/admin',
+    ],
+    
+
     /*
      * Route configuration.
      */
@@ -20,12 +30,6 @@ return [
         'middleware' => ['web'], // Must be ['web', 'admin'] admin middleware (auth and etc...)
     ],
 
-    /*
-     * Admin install directory.
-     */
-    'directory' => [
-        'admin' => app_path('Admin'),
-    ],
 
     /*
      * Admin upload setting.

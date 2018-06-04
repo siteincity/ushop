@@ -1,14 +1,19 @@
 @extends('admin.layout.main')
 
 {{-- Title --}}
-@section('title') Управление товарами  @endsection
+{{-- @section('title') Управление товарами  @endsection
 @section('title-description') Все товары @endsection
 @section('title-actions')
 	<a href="{{ route('product.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Новый товар</a>
-@endsection
+@endsection --}}
+
+
 
 
 @section('content')
+
+	{{-- Header --}}
+	@include('admin.layout.title', ['name' => 'Управление товарами', 'description' => 'Все товары'])
 
 	<section class="app-section">
 

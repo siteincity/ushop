@@ -93,27 +93,12 @@
     {{-- Content --}}
     <div class="wrapper">
         <div class="col-right">
-            
-            <div class="app-action-title row no-gutters justify-content-between"> 
-                <h3>
-                    @yield('title') 
-                    <small>
-                        @yield('title-description')
-                    </small>
-                </h3>
-                <div class="btn-group-sm">
-                    @yield('title-actions')     
-                </div>
-            </div>
                 
             @yield('content') 
                     
         </div>  
     </div>
 
-
-
-    
 
 
     <script>

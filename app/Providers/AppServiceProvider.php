@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Share models to all views
+        // view()->share([
+        //     'group' => Group::class,
+        //     'product' => Product::class,
+        // ]);
     }
 
     /**

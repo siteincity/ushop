@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,13 +20,14 @@ class Product extends Model
     protected $fillable = [
         'title',
         'published',
+        'group_id',
         //'slug', 
         //'articul',
         //'price',
     ];
 
     protected $attributes = [
-        'published' => 1,    
+        'published' => 1,   
     ];
 
 
@@ -37,29 +39,16 @@ class Product extends Model
     protected $perPage = 15;
 
 
-    // /**
-    //  * Update the model in the database.
-    //  *
-    //  * @param  array  $attributes
-    //  * @param  array  $options
-    //  * @return bool
-    //  */
-    // public function update(array $attributes = [], array $options = [])
-    // {
-    //     $attributes['published'] = isset($attributes['published']) ? $attributes['published'] : 0;
-
-    //     parent::update($attributes,$options);
-    // }
-
-
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function group()
     {
 
-        return $this->hasOne('App\Group');
+        return $this->belongsTo('App\Group');
     }
+
+    
 
 
 

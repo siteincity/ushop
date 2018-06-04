@@ -30,4 +30,17 @@ class Group extends Model
         return $this->belongsToMany(Attribute::class, 'group_attributes');
     }
 
+
+
+    /**
+     * @return array
+     **/
+    public static function getList()
+    {
+
+        return (new static)->all()->pluck('title','id')->toArray();
+    }
+
+
+
 }

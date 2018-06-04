@@ -14,10 +14,10 @@ Route::group([
     $router->get('/product', 'ProductController@index')->name('product');
     $router->get('/product/grid', 'ProductController@grid')->name('product.grid');
     $router->get('/product/create', 'ProductController@create')->name('product.create');
-    $router->get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
+    $router->get('/product/{id}/edit', 'ProductController@edit')->name('product.edit');
     $router->delete('/product/{id}', 'ProductController@destroy')->name('product.destroy');
     $router->post('/product/store', 'ProductController@store')->name('product.store');
-    $router->post('/product/update/{id}', 'ProductController@update')->name('product.update');
+    $router->post('/product/{id}/update', 'ProductController@update')->name('product.update');
     // $router->resource('/product', ProductController::class, [
     //     'names' => [
     //         'index' => 'product',

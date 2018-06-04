@@ -1,31 +1,32 @@
 @extends('admin.layout.main')
 
-{{-- Action Title --}}
-@section('title') Управление товарами  @endsection
 
 @section('content')
 	
+	
 	@if (isset($product))
-		{{-- Action Desc --}}	
-		@section('title-description') Редактор @endsection
-		@section('title-actions')
-			<a href="{{ route('product.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Новый товар</a>
-			<button type="button" 
-				class="btn btn-danger btn-delete" 
-				data-url="{{ route('product.destroy', ['id' => $product->id]) }}">
-				<i class="fa fa-minus-circle"></i> Удалить
-			</button>
-		@endsection
-		{{ Form::model($product, ['route' => ['product.update', $product->id], 'method'=>'POST']) }}
-	@else
-		{{-- Action Desc --}}
-		@section('title-description') Новый товар @endsection
-		{{ Form::open(['route' => 'product.store', 'method'=>'POST']) }}
-	@endif
 
-		@include('admin.product.form')
+		{{-- Header --}}
+		@include('admin.layout.title', ['name' => 'Редактор'])
+	
+		{{ Form::model($product, ['route' => ['product.update', $product->id], 'method'=>'POST']) }}
+		
+		@include('admin.product.form', ['disabled' => 'disabled'])
+
+	@else
+
+		{{-- Header --}}
+		@include('admin.layout.title', ['name' => 'Новый товар'])
+
+		{{ Form::open(['route' => 'product.store', 'method'=>'POST']) }}
+		
+		@include('admin.product.form', ['disabled' => ''])
+
+	@endif
+	
 
 	{{ Form::close() }}
+
 
 @endsection
 

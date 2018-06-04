@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Group;
 
 class ProductController extends Controller
 {
@@ -13,11 +14,13 @@ class ProductController extends Controller
 
     
     protected $product;
+    // protected $group;
 
 
-    function __construct(Product $product)
+    function __construct(Product $product, Group $group)
     {
         $this->product = $product;
+        // $this->group = $group;
     }
 
 
