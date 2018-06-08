@@ -41,6 +41,7 @@ class CreateProductTables extends Migration
             $table->timestamps();
         });
 
+
         // Table Attributes:
         Schema::create('attributes', function(Blueprint $table)
         {
@@ -54,13 +55,23 @@ class CreateProductTables extends Migration
             // $table->integer('rank')->default(0); // Sort rank  
         });
 
+
         // Table Product Attributes:
-        Schema::create('product_attributes', function (Blueprint $table) {    
-            $table->increments('id'); // Primary Key:
+        Schema::create('attribute_value_product', function (Blueprint $table) {    
+            // $table->increments('id'); // Primary Key:
             $table->unsignedInteger('product_id');  // Product 
+            // $table->unsignedInteger('attribute_id'); // Attribute
+            $table->unsignedInteger('attribute_value_id'); // Attribute Value
+        });
+
+
+        // Table Product Attribute Values:
+        Schema::create('attribute_values', function (Blueprint $table) {    
+            $table->increments('id'); // Primary Key:
             $table->unsignedInteger('attribute_id'); // Attribute
             $table->text('value')->nullable(); // Value
         });
+
 
         // Table Types:
         Schema::create('groups', function (Blueprint $table) {    
@@ -68,8 +79,9 @@ class CreateProductTables extends Migration
             $table->string('title')->default(''); // Type Title
         });
 
+
         // Table product_types:
-        Schema::create('group_attributes', function (Blueprint $table) {    
+        Schema::create('attribute_group', function (Blueprint $table) {    
             $table->unsignedInteger('group_id');  // Type 
             $table->unsignedInteger('attribute_id'); // Attribute
         });
@@ -86,8 +98,9 @@ class CreateProductTables extends Migration
     {
         Schema::dropIfExists('products');
         Schema::dropIfExists('attributes');
-        Schema::dropIfExists('product_attributes');
+        Schema::dropIfExists('attribute_value_product');
+        Schema::dropIfExists('attribute_values');
         Schema::dropIfExists('groups');
-        Schema::dropIfExists('group_attributes');
+        Schema::dropIfExists('attribute_group');
     }
 }

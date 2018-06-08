@@ -11,7 +11,7 @@
 	
 		{{ Form::model($product, ['route' => ['product.update', $product->id], 'method'=>'POST']) }}
 		
-		@include('admin.product.form', ['disabled' => 'disabled'])
+		@include('admin.product.form')
 
 	@else
 
@@ -20,7 +20,7 @@
 
 		{{ Form::open(['route' => 'product.store', 'method'=>'POST']) }}
 		
-		@include('admin.product.form', ['disabled' => ''])
+		@include('admin.product.form')
 
 	@endif
 	
@@ -36,7 +36,7 @@
 	<script>
 		$(function(){
 
-			$('.app-input__select').material_select();
+			$('.app-input__select').select2();
 			
 			$('.btn-delete').appButtonDelete({
 				token: _token,
@@ -46,6 +46,11 @@
 					}
 				}
 			});
+
+			$('#group_id').on('change', function(){
+				var group_id = $(this).val();
+				window.location.href = _current_url +'?group_id='+group_id;
+			})
 
 		})
 	</script>	

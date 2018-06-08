@@ -21,9 +21,6 @@ class Product extends Model
         'title',
         'published',
         'group_id',
-        //'slug', 
-        //'articul',
-        //'price',
     ];
 
     protected $attributes = [
@@ -40,15 +37,29 @@ class Product extends Model
 
 
     /**
+     * Relation to Group
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function group()
     {
 
-        return $this->belongsTo('App\Group');
+        return $this->belongsTo(Group::class);
     }
 
-    
+
+  
+    /**
+     * Relation to AttributeValue
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function values()
+    {
+        
+        return $this->belongsToMany(AttributeValue::class);
+    }
+
 
 
 

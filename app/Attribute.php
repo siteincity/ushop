@@ -26,19 +26,24 @@ class Attribute extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'product_attributes')->withPivot('value');
-    }
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function groups()
     {
-        return $this->belongsToMany(Group::class, 'group_attributes');
+        
+        return $this->belongsToMany(Group::class);
     }
+    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function values()
+    {
+        
+        return $this->hasMany(AttributeValue::class);
+    }
+
+
+
 
 
 }

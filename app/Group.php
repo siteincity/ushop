@@ -25,9 +25,20 @@ class Group extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+    public function products()
+    {
+        
+        return $this->hasMany(Product::class);
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'group_attributes');
+        
+        return $this->belongsToMany(Attribute::class);
     }
 
 
