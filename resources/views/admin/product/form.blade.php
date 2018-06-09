@@ -49,7 +49,7 @@
 						    {{ Form::select(
 								'attributes['.$attribute->type.'][]', 
 								$attribute->values->pluck('value','id'), 
-								$product->values->where('attribute_id', $attribute->id)->pluck('id'), 
+								//$product->values->where('attribute_id', $attribute->id)->pluck('id'), 
 								['id' => $attribute->slug, 'class' => 'app-input__select form-control']
 							)}}  
 					    @break
@@ -58,7 +58,7 @@
 						    {{ Form::select(
 								'attributes['.$attribute->type.'][]', 
 								$attribute->values->pluck('value','id'), 
-								$product->values->where('attribute_id', $attribute->id)->pluck('id'), 
+								//$product->values->where('attribute_id', $attribute->id)->pluck('id'), 
 								['id' => $attribute->slug, 'class' => 'app-input__select form-control', 'multiple' => 'multiple']
 							)}}  
 					    @break
@@ -66,7 +66,7 @@
 					    @default
 						    {{ Form::text(
 						    	'attributes['.$attribute->type.']['.$attribute->id.']', 
-						    	$product->values->where('attribute_id', $attribute->id)->first()->value, 
+						    	//$product->values->where('attribute_id', $attribute->id)->first()->value, 
 						    	['class' => 'form-control']) 
 						    }}  
 					    	

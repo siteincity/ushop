@@ -85,7 +85,8 @@ class CreateProductTables extends Migration
             $table->unsignedInteger('group_id');  // Type 
             $table->unsignedInteger('attribute_id'); // Attribute
         });
-
+        
+        
 
     }
 

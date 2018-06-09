@@ -12,6 +12,8 @@ class ProductController extends Controller
 
     protected $product;
 
+    protected $data = [];
+
 
     function __construct(Product $product, Group $group)
     {
@@ -43,7 +45,9 @@ class ProductController extends Controller
     {         
         if ($request->has('group_id'))
             return view('admin.product.edit', [
-                'attributes' => $this->group->find($request->group_id)->attributes->load('values'),
+                'data' => [
+                    'attributes' => $this->group->find($request->group_id)->attributes->load('values'),
+                ]
             ]);
     }
 

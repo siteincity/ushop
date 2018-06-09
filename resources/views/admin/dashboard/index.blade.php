@@ -13,7 +13,7 @@
 
 			{{ Form::open(['method'=>'GET', 'autocomplete' => 'off']) }}
 
-
+			
 			@php
 
 				$request = request()->all();
@@ -29,6 +29,7 @@
  				}
 	
 				// dd($result);
+				dd($result);
 
 
 			@endphp
@@ -42,6 +43,10 @@
 
 
 @endsection
+
+<select name="" id="" disabled="disabled">
+	<option value="33">33</option>
+</select>
 
 
 

@@ -36,7 +36,7 @@ class Attribute extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function values()
+    public function options()
     {
         
         return $this->hasMany(AttributeValue::class);
