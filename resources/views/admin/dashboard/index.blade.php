@@ -27,6 +27,7 @@
  					$result[$value->attribute_id][$value->id] = $value->value; 
  				}
 
+
 				
 				// dd($result);
 

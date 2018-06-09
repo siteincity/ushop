@@ -8,14 +8,14 @@ use App\Group;
 
 class ProductController extends Controller
 {
-    
+
 
     protected $product;
 
 
     function __construct(Product $product, Group $group)
     {
-        
+
         $this->product = $product;
         $this->group = $group;
     }
@@ -29,18 +29,18 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->product->paginate();
-        
-        return view('admin.product.index', ['products' => $products]);    
+
+        return view('admin.product.index', ['products' => $products]);
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {         
+    {
         if ($request->has('group_id'))
             return view('admin.product.edit', [
                 'data' => [
@@ -53,15 +53,15 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id, Request $request)
-    {    
+    {
         $product = $this->product->find($id);
-    
+
         // Set group from request
-        if ($request->has('group_id')) 
+        if ($request->has('group_id'))
             $product->group_id = $request->group_id;
 
         return view('admin.product.edit', [
@@ -74,12 +74,12 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        
+
         $attributes = $request->input('attributes');
 
         $product = $this->product->create($request->except('attributes'));
@@ -88,32 +88,32 @@ class ProductController extends Controller
         return redirect(route('product'));
         // $this->product->values()->attach();
     }
- 
- 
+
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {    
+    {
         $this->product->find($id)->update($request->all());
 
         return back();
     }
 
-    
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $ids
      * @return \Illuminate\Http\Response
      */
     public function destroy($ids)
     {
-        try {    
+        try {
             $this->product->destroy($ids);
             return response()->json([
                 'type' => 'success',
@@ -121,13 +121,8 @@ class ProductController extends Controller
             ]);
         } catch (Exception $e) {
             return json_encode($e->getMessage());
-        }  
+        }
     }
-
-
-
-
-    
 
 
 }
