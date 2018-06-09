@@ -24,15 +24,13 @@
 				$test = App\Product::find(1)->values;
  				
  				foreach ($test as $value) {
- 					// echo $value->attribute->caption;
  					$result[$value->attribute_id][$value->id] = $value->value; 
  				}
-	
+
+				
 				// dd($result);
-				dd($result);
 
-
-			@endphp
+            @endphp
 
 			{{ Form::button('Сохранить', ['type'=>'submit','class' => 'btn btn-default']) }}
 			{{ Form::close() }}

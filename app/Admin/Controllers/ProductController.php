@@ -12,8 +12,6 @@ class ProductController extends Controller
 
     protected $product;
 
-    protected $data = [];
-
 
     function __construct(Product $product, Group $group)
     {

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Product
  * @package App
+ * @method static find($int)
  */
 class Product extends Model
 {

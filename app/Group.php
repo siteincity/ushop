@@ -23,7 +23,7 @@ class Group extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function products()
     {
