@@ -58,10 +58,12 @@ class Product extends Model
     public function values()
     {
         
-        return $this->belongsToMany(AttributeValue::class);
+        return $this->belongsToMany(FeatureValue::class);
     }
 
 
+
+    
 
 
 }

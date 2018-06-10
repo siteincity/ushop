@@ -35,10 +35,10 @@ class Group extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function attributes()
+    public function features()
     {
         
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsToMany(Feature::class);
     }
 
 
@@ -49,7 +49,27 @@ class Group extends Model
     public static function getList()
     {
 
-        return (new static)->all()->pluck('title','id')->toArray();
+        return self::all()->pluck('title','id')->toArray();
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getFeatures()
+    {
+        
+        return $this->features;
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getFeaturesWithValues()
+    {
+        
+        return $this->getFeatures()->load('values');
     }
 
 

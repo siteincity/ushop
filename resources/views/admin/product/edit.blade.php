@@ -10,8 +10,6 @@
 		@include('admin.layout.title', ['name' => 'Редактор'])
 	
 		{{ Form::model($product, ['route' => ['product.update', $product->id], 'method'=>'POST']) }}
-		
-		@include('admin.product.form')
 
 	@else
 
@@ -19,12 +17,11 @@
 		@include('admin.layout.title', ['name' => 'Новый товар'])
 
 		{{ Form::open(['route' => 'product.store', 'method'=>'POST']) }}
-		
-		@include('admin.product.form')
 
 	@endif
 	
-
+	@include('admin.product.form')
+	
 	{{ Form::close() }}
 
 
@@ -49,7 +46,7 @@
 
 			$('#group_id').on('change', function(){
 				var group_id = $(this).val();
-				window.location.href = _current_url +'?group_id='+group_id;
+				window.location.href = _current_url + '?group_id=' + group_id;
 			})
 
 		})

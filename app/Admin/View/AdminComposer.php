@@ -10,8 +10,6 @@ class AdminComposer
 
 
     /**
-     * undocumented class variable
-     *
      * @var string
      **/
     protected $group;
@@ -23,21 +21,8 @@ class AdminComposer
         $this->group = $group;
     }
 
-    /**
-     * Привязка данных к представлению.
-     *
-     * @param  View $view
-     * @return void
-     **/
-    // public function compose(View $view)
-    // {
-    // 	$view->with('groupList', [1,2,3]);
-    // }
-
 
     /**
-     * Привязка данных к представлению.
-     *
      * @param  View $view
      * @return void
      **/

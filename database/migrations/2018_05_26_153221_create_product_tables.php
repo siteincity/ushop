@@ -43,7 +43,7 @@ class CreateProductTables extends Migration
 
 
         // Table Attributes:
-        Schema::create('attributes', function(Blueprint $table)
+        Schema::create('features', function(Blueprint $table)
         {
             $table->increments('id'); // Primary Key:
             $table->string('type', 100); // Select, checkbox, text ...
@@ -57,33 +57,31 @@ class CreateProductTables extends Migration
 
 
         // Table Product Attributes:
-        Schema::create('attribute_value_product', function (Blueprint $table) {    
-            // $table->increments('id'); // Primary Key:
-            $table->unsignedInteger('product_id');  // Product 
-            // $table->unsignedInteger('attribute_id'); // Attribute
-            $table->unsignedInteger('attribute_value_id'); // Attribute Value
+        Schema::create('feature_value_product', function (Blueprint $table) {    
+            $table->unsignedInteger('product_id'); 
+            $table->unsignedInteger('feature_value_id'); 
         });
 
 
         // Table Product Attribute Values:
-        Schema::create('attribute_values', function (Blueprint $table) {    
-            $table->increments('id'); // Primary Key:
-            $table->unsignedInteger('attribute_id'); // Attribute
-            $table->text('value')->nullable(); // Value
+        Schema::create('feature_values', function (Blueprint $table) {    
+            $table->increments('id'); 
+            $table->unsignedInteger('feature_id'); 
+            $table->text('value')->nullable(); 
         });
 
 
-        // Table Types:
+        // Table Groups:
         Schema::create('groups', function (Blueprint $table) {    
-            $table->increments('id'); // Primary Key:
-            $table->string('title')->default(''); // Type Title
+            $table->increments('id');
+            $table->string('title')->default('');
         });
 
 
-        // Table product_types:
-        Schema::create('attribute_group', function (Blueprint $table) {    
-            $table->unsignedInteger('group_id');  // Type 
-            $table->unsignedInteger('attribute_id'); // Attribute
+        // Table feature to group:
+        Schema::create('feature_group', function (Blueprint $table) {    
+            $table->unsignedInteger('group_id');
+            $table->unsignedInteger('feature_id');
         });
         
         
@@ -97,11 +95,11 @@ class CreateProductTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
-        Schema::dropIfExists('attributes');
-        Schema::dropIfExists('attribute_value_product');
-        Schema::dropIfExists('attribute_values');
         Schema::dropIfExists('groups');
-        Schema::dropIfExists('attribute_group');
+        Schema::dropIfExists('products');
+        Schema::dropIfExists('features');
+        Schema::dropIfExists('feature_value_product');
+        Schema::dropIfExists('feature_values');
+        Schema::dropIfExists('feature_group');
     }
 }

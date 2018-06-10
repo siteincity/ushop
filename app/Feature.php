@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Attribute extends Model
+class Feature extends Model
 {
+    
 
     /**
      * @var bool
@@ -36,14 +37,11 @@ class Attribute extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function options()
+    public function values()
     {
         
-        return $this->hasMany(AttributeValue::class);
+        return $this->hasMany(FeatureValue::class);
     }
 
-
-
-
-
+    
 }

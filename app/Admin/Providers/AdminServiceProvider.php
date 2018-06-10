@@ -18,6 +18,9 @@ class AdminServiceProvider extends ServiceProvider
 
         // Load admin routes
         $this->loadRoutesFrom(config('admin.route.file'));
+
+        // 
+        $this->app->make('form')->considerRequest(true);
     }
 
     /**

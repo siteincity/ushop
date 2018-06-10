@@ -1,11 +1,3 @@
-{{-- @section('title') Управление товарами  @endsection
-@section('title-description') Все товары @endsection
-@section('title-actions')
-	<a href="{{ route('product.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Новый товар</a>
-@endsection --}}
-
-{{-- {{ dd($groupGetList) }} --}}
-
 <div class="app-action-title row no-gutters justify-content-between"> 
 	
 	<h3>

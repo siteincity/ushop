@@ -10,14 +10,16 @@ class ProductController extends Controller
 {
 
 
+    /**
+     * @var Product
+     */
     protected $product;
 
 
-    function __construct(Product $product, Group $group)
+    function __construct(Product $product)
     {
 
         $this->product = $product;
-        $this->group = $group;
     }
 
 
@@ -43,30 +45,30 @@ class ProductController extends Controller
     {
         if ($request->has('group_id'))
             return view('admin.product.edit', [
-                'data' => [
-                    'attributes' => $this->group->find($request->group_id)->attributes->load('values'),
-                ]
+                'features' => Group::find($request->group_id)->getFeaturesWithValues(),  
             ]);
+        // return redirect(405);
     }
 
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id, Request $request)
-    {
+    {    
         $product = $this->product->find($id);
 
         // Set group from request
         if ($request->has('group_id'))
             $product->group_id = $request->group_id;
+        
+        $features = $product->group->getFeaturesWithValues();
 
         return view('admin.product.edit', [
-            'product' => $product,
-            'attributes' => $product->group->attributes->load('values'),
+            'product' => $product, 
+            'features' => $features
         ]);
     }
 
@@ -86,7 +88,6 @@ class ProductController extends Controller
 
         $product->values()->sync(array_merge($attributes['select'], $attributes['multiselect']));
         return redirect(route('product'));
-        // $this->product->values()->attach();
     }
 
 

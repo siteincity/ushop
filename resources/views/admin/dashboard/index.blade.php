@@ -14,27 +14,23 @@
 			{{ Form::open(['method'=>'GET', 'autocomplete' => 'off']) }}
 
 			
-			@php
-
+			{{-- @php
 				$request = request()->all();
 				if (!empty($request)) dd($request);
-				
-				//$product = App\Product::find(1);
+            @endphp --}}
+			
+			@include('admin.widget.form.label', ['name' => 'text','value' => 54534534545,])
+            @include('admin.widget.form.select', [
+            	'name' => 'text',
+            	'options' => [1,2,3],
+            	'values' => [1],
+            ])
 
-				$test = App\Product::find(1)->values;
- 				
- 				foreach ($test as $value) {
- 					$result[$value->attribute_id][$value->id] = $value->value; 
- 				}
 
-
-				
-				// dd($result);
-
-            @endphp
 
 			{{ Form::button('Сохранить', ['type'=>'submit','class' => 'btn btn-default']) }}
 			{{ Form::close() }}
+
 
 		</div>
 	</div>
@@ -43,9 +39,6 @@
 
 @endsection
 
-<select name="" id="" disabled="disabled">
-	<option value="33">33</option>
-</select>
 
 
 

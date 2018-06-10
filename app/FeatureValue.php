@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AttributeValue extends Model
+class FeatureValue extends Model
 {
-
+    
     /**
      * @var bool
      */
@@ -25,16 +25,14 @@ class AttributeValue extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function attribute()
+    public function feature()
     {
         
-        return $this->belongsTo(Attribute::class);
+        return $this->belongsTo(Feature::class);
     }
 
 
     /**
-     * Relation to Attribute
-     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
     public function products()

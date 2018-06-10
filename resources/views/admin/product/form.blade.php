@@ -6,7 +6,7 @@
 			<a class="nav-link app-nav-link active" data-toggle="tab" href="#tab-description">Общее</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link app-nav-link " data-toggle="tab" href="#tab-attributes">Характеристики</a>
+			<a class="nav-link app-nav-link " data-toggle="tab" href="#tab-features">Характеристики</a>
 		</li>
 	</ul>
 
@@ -17,7 +17,7 @@
 		<div class="tab-pane show active app-tab-pane" id="tab-description">	
 
 			<div class="form-group">
-				{{ Form::label('group_id', 'Тип товара') }} 
+				{{ Form::label('group_id', 'Группа') }} 
 				{{ Form::select('group_id', $groupGetList, null, ['id' => 'group_id', 'class' => 'app-input__select form-control']) }}		
 			</div>
 			
@@ -33,42 +33,38 @@
 
 		</div>
 
-		{{-- Tab:attributes --}}
-		<div class="tab-pane app-tab-pane" id="tab-attributes">
+		{{-- Tab:features --}}
+		<div class="tab-pane app-tab-pane" id="tab-features">
 			
-			{{-- {{ dd($product->values()->attributes) }} --}}
-
-			@foreach ($attributes as $attribute)
+			@foreach ($features as $feature)
 				
 				<div class="form-group">
-					
-					{{ Form::label($attribute->slug, $attribute->caption) }}
 
-					@switch($attribute->type)
-						@case('select')
-						    {{ Form::select(
-								'attributes['.$attribute->type.'][]', 
-								$attribute->values->pluck('value','id'), 
-								//$product->values->where('attribute_id', $attribute->id)->pluck('id'), 
-								['id' => $attribute->slug, 'class' => 'app-input__select form-control']
-							)}}  
+					@include('admin.widget.form.label', ['name' => $feature->slug, 'value' => $feature->caption])
+
+					@switch($feature->type)
+						@case('select') 
+				            @include('admin.widget.form.select', [
+				            	'name' => 'features['.$feature->type.'][]',
+				            	'options' => $feature->values->pluck('value','id'),
+				            	'values' => $product->values->where('feature_id', $feature->id)->pluck('id'),
+				            ])  
 					    @break
 					    
 					    @case('multiselect')
-						    {{ Form::select(
-								'attributes['.$attribute->type.'][]', 
-								$attribute->values->pluck('value','id'), 
-								//$product->values->where('attribute_id', $attribute->id)->pluck('id'), 
-								['id' => $attribute->slug, 'class' => 'app-input__select form-control', 'multiple' => 'multiple']
-							)}}  
+							@include('admin.widget.form.select', [
+				            	'name' => 'features['.$feature->type.'][]',
+				            	'options' => $feature->values->pluck('value','id'),
+				            	'values' => $product->values->where('feature_id', $feature->id)->pluck('id'),
+				            	'attributes' => ['multiple'=>'multiple'],
+				            ]) 
 					    @break
 
 					    @default
-						    {{ Form::text(
-						    	'attributes['.$attribute->type.']['.$attribute->id.']', 
-						    	//$product->values->where('attribute_id', $attribute->id)->first()->value, 
-						    	['class' => 'form-control']) 
-						    }}  
+						    @include('admin.widget.form.text', [
+				            	'name' => 'features['.$feature->type.']['.$feature->id.']',
+				            	'value' => 'weight 111',
+				            ])   
 					    	
 					@endswitch
 
@@ -76,9 +72,7 @@
 
 			@endforeach
 			
-			
 
-			{{-- {{ dd($attributes) }} --}}
 			
 		</div>
 
