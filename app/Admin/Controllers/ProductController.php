@@ -44,10 +44,10 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         if ($request->has('group_id'))
-            return view('admin.product.edit', [
-                'features' => Group::find($request->group_id)->getFeaturesWithValues(),  
+            return view('admin.product.form', [
+                'features' => Group::find($request->group_id)->getFormFeatures(),  
             ]);
-        // return redirect(405);
+        // return redirect(404);
     }
 
 
@@ -61,14 +61,11 @@ class ProductController extends Controller
         $product = $this->product->find($id);
 
         // Set group from request
-        if ($request->has('group_id'))
-            $product->group_id = $request->group_id;
-        
-        $features = $product->group->getFeaturesWithValues();
+        if ($request->has('group_id')) $product->group_id = $request->group_id;
 
-        return view('admin.product.edit', [
+        return view('admin.product.form', [
             'product' => $product, 
-            'features' => $features
+            'features' => $product->getFormFeatures(),
         ]);
     }
 
@@ -81,13 +78,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // DB::transaction(function () {
+            
+        // });
+        // dd($request->all());
+        // $p = $request->except('features');
+        // $f = $request->input('features');
 
-        $attributes = $request->input('attributes');
+        $product = $this->product->create($request->except('features'));
+        $product->featureValues()->sync($product->saveFormFeatures($request->input('features')));
 
-        $product = $this->product->create($request->except('attributes'));
+        // dd($product);
 
-        $product->values()->sync(array_merge($attributes['select'], $attributes['multiselect']));
-        return redirect(route('product'));
+        // $product->values()->sync(array_merge($f['select'], $f['multiselect']));
+        // return redirect(route('product'));
+        return redirect(route('product.edit',['id' => $product->id]));
     }
 
 
@@ -100,8 +106,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->product->find($id)->update($request->all());
-
+        $product = $this->product->find($id);
+        $product->update($request->except('features'));
+        $product->featureValues()->sync($product->saveFormFeatures($request->input('features')));
+        // dd($request->all());
         return back();
     }
 

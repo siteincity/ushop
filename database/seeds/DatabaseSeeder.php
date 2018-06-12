@@ -53,6 +53,8 @@ class DatabaseSeeder extends Seeder
             ['type' => 'select', 'slug' => 'obraz', 'caption' => 'Святой образ'],
             ['type' => 'multiselect', 'slug' => 'size', 'caption' => 'Размер кольца'],
             ['type' => 'text', 'slug' => 'weight', 'caption' => 'Вес изделия'],
+            ['type' => 'textarea', 'slug' => 'description', 'caption' => 'Описание товара'],
+            ['type' => 'textarea', 'slug' => 'label', 'caption' => 'Примечание'],
         ]);
 
         // DB::table('product_attributes')->insert([
@@ -78,9 +80,9 @@ class DatabaseSeeder extends Seeder
             ['feature_id' => '2', 'value' => '18'],
             ['feature_id' => '3', 'value' => '15 грамм'],
             ['feature_id' => '3', 'value' => '7 грамм'],
-            ['feature_id' => '3', 'value' => '2.6 грамм'],
-            ['feature_id' => '3', 'value' => '55 грамм'],
             ['feature_id' => '3', 'value' => '156 грамм'],
+            ['feature_id' => '4', 'value' => 'Описание товара. Произвольный текст тут может быть'],
+            ['feature_id' => '5', 'value' => 'Примечание, записка пользователя'],
         ]);     
 
         DB::table('feature_value_product')->insert([
@@ -90,6 +92,11 @@ class DatabaseSeeder extends Seeder
             ['product_id' => '1', 'feature_value_id' => '6'],
             ['product_id' => '1', 'feature_value_id' => '7'],
             ['product_id' => '1', 'feature_value_id' => '10'],
+
+            ['product_id' => '1', 'feature_value_id' => '11'],
+            ['product_id' => '1', 'feature_value_id' => '12'],
+
+
             ['product_id' => '2', 'feature_value_id' => '3'],
             ['product_id' => '2', 'feature_value_id' => '4'],
             ['product_id' => '2', 'feature_value_id' => '6'],
@@ -100,6 +107,8 @@ class DatabaseSeeder extends Seeder
             ['group_id' => '1', 'feature_id' => '1'],
             ['group_id' => '1', 'feature_id' => '2'],
             ['group_id' => '1', 'feature_id' => '3'],
+            ['group_id' => '1', 'feature_id' => '4'],
+            ['group_id' => '1', 'feature_id' => '5'],
             ['group_id' => '2', 'feature_id' => '1'],
             ['group_id' => '2', 'feature_id' => '2'],
             ['group_id' => '3', 'feature_id' => '3'],

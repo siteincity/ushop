@@ -13,39 +13,45 @@
 				{{ Form::button('Удалить', ['type'=>'submit','class' => 'btn btn-danger btn-sm']) }}	
 			</div>
 		</div> --}}
-		
-		<table class="table app-grid app-grid__product">
-			<thead>
-				<tr>
-					<th>all</th>
-					<th>ID</th>
-					<th>Наименование</th>
-					<th>Группа</th>
-					<th>Опубликовано?</th>
-					<th>Action</th>
-				</tr>	
-			</thead>
-			<tbody>
+		@if ($products->first())
+			<table class="table app-grid app-grid__product">
+				<thead>
+					<tr>
+						<th>all</th>
+						<th>ID</th>
+						<th>Наименование</th>
+						<th>Группа</th>
+						<th>Опубликовано?</th>
+						<th>Action</th>
+					</tr>	
+				</thead>
+				<tbody>
 
-			{{-- list --}}
-			@foreach ($products as $product)
-				<tr id="row_{{ $product->id }}">
-					<td>cb</td>
-					<td>{{ $product->id }}</td>
-					<td><a href="{{ route('product.edit', $product->id) }}">{{ $product->title }}</a></td>
-					<td>{{ $product->group->title }}</td>
-					<td>{{ $product->published ? 'Да' : 'Нет' }}</td>
-					<td>	
-						<button type="button" class="btn btn-danger btn-sm" data-url="{{ route('product.destroy', ['id' => $product->id]) }}"><i class="fa fa-minus-circle"></i></button>	
-					</td>
-				</tr>
-			@endforeach	
-			
+				{{-- list --}}
+				@foreach ($products as $product)
+					<tr id="row_{{ $product->id }}">
+						<td>cb</td>
+						<td>{{ $product->id }}</td>
+						<td><a href="{{ route('product.edit', $product->id) }}">{{ $product->title }}</a></td>
+						<td>{{ $product->group->title }}</td>
+						<td>{{ $product->published ? 'Да' : 'Нет' }}</td>
+						<td>	
+							<button type="button" class="btn btn-danger btn-sm" data-url="{{ route('product.destroy', ['id' => $product->id]) }}"><i class="fa fa-minus-circle"></i></button>	
+						</td>
+					</tr>
+				@endforeach	
+				
 
-			</tbody>	
-		</table>
+				</tbody>	
+			</table>
+			{{ $products->render() }}
+		@else
+			<div class="card alert-info text-center p-3">
+				Товары не найдены
+			</div>
+		@endif
 		
-		{{ $products->render() }}
+		
                
 	</section>
 	

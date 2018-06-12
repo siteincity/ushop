@@ -56,20 +56,20 @@ class Group extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getFeatures()
+    public function getFormFeatures()
     {
         
-        return $this->features;
-    }
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getFeaturesWithValues()
-    {
+        $fields = [];
+        $features = $this->features->load('featureValues');
         
-        return $this->getFeatures()->load('values');
+        foreach ($features as $feature) {
+            $fields[] = collect($feature)
+                ->put('options', $feature->featureValues->pluck('value','id'))->except(['pivot'])
+                ->put('values', null)
+                ->toArray();     
+        }
+
+        return $fields;           
     }
 
 

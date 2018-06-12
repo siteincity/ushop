@@ -13,19 +13,58 @@
 
 			{{ Form::open(['method'=>'GET', 'autocomplete' => 'off']) }}
 
-			
-			{{-- @php
-				$request = request()->all();
-				if (!empty($request)) dd($request);
-            @endphp --}}
-			
-			@include('admin.widget.form.label', ['name' => 'text','value' => 54534534545,])
-            @include('admin.widget.form.select', [
-            	'name' => 'text',
-            	'options' => [1,2,3],
-            	'values' => [1],
-            ])
+			<pre>@php
+	
+				$data = [
+				    1 => [
+				      0 => "1",
+				    ],
+				    2 => [
+				      0 => "4",
+				      1 => "5",
+				      2 => "6",
+				    ],
+				    3 => [
+				      16 => "65767676767",
+				    ],
+				    4 => [
+				      17 => "5454545gfgfgfgf",
+				    ],
+				    5 => [
+				      18 => "6565",
+				    ],
+				];
 
+				// $product = App\Product::prepareFeatures($features);
+				// $data = collect($data);
+				// $features = App\Group::find(1)->features;
+
+				// foreach ($data as $feature_id => $values) {
+				// 	foreach ($values as $feature_value_id => $value) {
+				// 		switch ($features->find($feature_id)->type) {
+	   //                      case 'text':
+	   //                      case 'textarea':
+	                        	
+	   //                      	$featureValue = App\FeatureValue::updateOrCreate(
+	   //                      		['id' => $feature_value_id],
+	   //                      		['feature_id' => $feature_id, 'value' => $value]
+	   //                      	);
+
+	   //                      	if ($featureValue)
+	   //                      		$result[] = $featureValue->id;
+	                        		
+	   //                      break;
+	   //                      default:
+		  //       				$result[] = $value;	
+	   //                      break;
+	   //                  }	
+				// 	}	
+				// }
+
+				// dd(App\Product::find(1)->saveFormFeatures($data));
+
+
+			@endphp</pre>
 
 
 			{{ Form::button('Сохранить', ['type'=>'submit','class' => 'btn btn-default']) }}
@@ -47,32 +86,6 @@
 	// $request = request()->all();
 	// if (!empty($request)) dd($request);
 	
-
-	// $product = App\Product::find(1);
-
-	// $group_attributes = $product->group->attributes;
-	
-	// //dd($group_attributes);
-
-	// $values = [];
-	// foreach ($product->attributes as $attribute) {
-	// 	$values[$attribute->id][] = $attribute->pivot->value;
-	// }
-
-	// //dd($product->attributes);
-	
-	// foreach ($group_attributes as $attribute) {
-	// 	echo '<h2>attribute = '.$attribute->id.'</h2>';
-	// 	$current = [];
-	// 	if (isset($values[$attribute->id]))
-	// 		$current = $values[$attribute->id];
-			
-	// 	echo '<div class="form-group">';
-	// 	echo Form::select($attribute->slug.'[]', $current, null, ['id' => $attribute->slug, 'class' => 'form-control', 'multiple' => true]);	
-	// 	echo Form::label($attribute->slug, $attribute->caption);
-	// 	echo '</div>';
-
-	// }
 
 @endphp
 

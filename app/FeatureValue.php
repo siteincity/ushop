@@ -18,6 +18,7 @@ class FeatureValue extends Model
      * @var array
      */
     protected $fillable = [
+        'feature_id',
         'value',
     ];
 
