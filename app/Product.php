@@ -107,7 +107,18 @@ class Product extends Model
      * @param $features
      * @return  array of $ids
      */
-    public function saveFormFeatures(array $formFeatures)
+    public function bindFeatureValues(array $features)
+    {
+          
+        return $this->featureValues()->sync($this->prepareFormFeatures($features));
+    }
+
+
+    /**
+     * @param $formFeatures
+     * @return  array of $ids
+     */
+    protected function prepareFormFeatures(array $formFeatures)
     {
         
         $sync = [];

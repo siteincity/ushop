@@ -82,17 +82,10 @@ class ProductController extends Controller
         // DB::transaction(function () {
             
         // });
-        // dd($request->all());
-        // $p = $request->except('features');
-        // $f = $request->input('features');
 
         $product = $this->product->create($request->except('features'));
-        $product->featureValues()->sync($product->saveFormFeatures($request->input('features')));
+        $product->bindFeatureValues($request->input('features'));
 
-        // dd($product);
-
-        // $product->values()->sync(array_merge($f['select'], $f['multiselect']));
-        // return redirect(route('product'));
         return redirect(route('product.edit',['id' => $product->id]));
     }
 
@@ -104,11 +97,11 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
         $product = $this->product->find($id);
         $product->update($request->except('features'));
-        $product->featureValues()->sync($product->saveFormFeatures($request->input('features')));
+        $product->bindFeatureValues($request->input('features'));
         // dd($request->all());
         return back();
     }

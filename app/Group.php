@@ -54,7 +54,7 @@ class Group extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Array
      */
     public function getFormFeatures()
     {
