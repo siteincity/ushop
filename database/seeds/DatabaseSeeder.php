@@ -57,19 +57,6 @@ class DatabaseSeeder extends Seeder
             ['type' => 'textarea', 'slug' => 'label', 'caption' => 'Примечание'],
         ]);
 
-        // DB::table('product_attributes')->insert([
-        //     ['product_id' => '1', 'feature_id' => '1', 'value_id' => '1'],
-        //     ['product_id' => '1', 'feature_id' => '2', 'value_id' => '4'],
-        //     ['product_id' => '1', 'feature_id' => '2', 'value_id' => '5'],
-        //     ['product_id' => '1', 'feature_id' => '2', 'value_id' => '6'],
-        //     ['product_id' => '1', 'feature_id' => '2', 'value_id' => '7'],
-        //     ['product_id' => '1', 'feature_id' => '3', 'value_id' => '10'],
-        //     ['product_id' => '2', 'feature_id' => '1', 'value_id' => '3'],
-        //     ['product_id' => '2', 'feature_id' => '2', 'value_id' => '4'],
-        //     ['product_id' => '2', 'feature_id' => '2', 'value_id' => '6'],
-        //     ['product_id' => '2', 'feature_id' => '3', 'value_id' => '11'],
-        // ]);
-
         App\FeatureValue::insert([
             ['feature_id' => '1', 'value' => 'Архангел Михаил'],
             ['feature_id' => '1', 'value' => 'Архангел Гавриил'],
@@ -95,7 +82,6 @@ class DatabaseSeeder extends Seeder
 
             ['product_id' => '1', 'feature_value_id' => '11'],
             ['product_id' => '1', 'feature_value_id' => '12'],
-
 
             ['product_id' => '2', 'feature_value_id' => '3'],
             ['product_id' => '2', 'feature_value_id' => '4'],

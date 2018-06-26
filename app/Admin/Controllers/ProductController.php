@@ -84,9 +84,9 @@ class ProductController extends Controller
         // });
 
         $product = $this->product->create($request->except('features'));
-        $product->bindFeatureValues($request->input('features'));
+        $product->syncFeatures($request->input('features'));
 
-        return redirect(route('product.edit',['id' => $product->id]));
+        return redirect(route('product.edit', ['id' => $product->id]));
     }
 
 
@@ -99,10 +99,10 @@ class ProductController extends Controller
      */
     public function update($id, Request $request)
     {
+        // dd($request->all());
         $product = $this->product->find($id);
         $product->update($request->except('features'));
-        $product->bindFeatureValues($request->input('features'));
-        // dd($request->all());
+        $product->syncFeatures($request->input('features'));
         return back();
     }
 

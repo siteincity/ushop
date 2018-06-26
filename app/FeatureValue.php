@@ -34,13 +34,26 @@ class FeatureValue extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
-    public function products()
+     * Обновить, добавить новую или удалить запись
+     * Пример: App\FeatureValue::findOrNew($id)->saveOrDelete($feature_id, 'Текст ...');
+     * @return $id or null
+     */
+    public function saveOrDelete($feature_id, $value)
     {
         
-        return $this->belongsToMany(Product::class);
+        if (!$value) 
+            if ($this->delete())
+                return null;
+
+        $this->feature_id = $feature_id;
+        $this->value = $value;
+        $this->save();
+
+        return $this->id;                  
     }
+
+
+
 
 
 }

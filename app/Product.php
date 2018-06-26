@@ -13,7 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
+    
     // use FormAccessible;
+    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +28,12 @@ class Product extends Model
         'group_id',
     ];
 
+
+    /**
+     * The attributes that are default values.
+     *
+     * @var array
+     */
     protected $attributes = [
         'published' => 1,   
     ];
@@ -39,6 +48,37 @@ class Product extends Model
 
 
     /**
+     * this is a recommended way to declare event handlers
+     * 
+     */
+    protected static function boot() 
+    {
+        parent::boot();
+
+        // Событие перед удалением
+        // Дополнительно чистим значения характеристик типа [text|textarea] данного товара, 
+        // так как они НЕ являются опциями и используются только в качестве дополнительных свойств.
+        static::deleting(function($product) { 
+            $product->featureValues->each(function($value){
+                switch ($value->feature->type) {
+                    case 'text':
+                    case 'textarea':
+                        $value->delete();           
+                    break;
+                }   
+            });
+        });
+        
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Отношения с другими моделями
+    |--------------------------------------------------------------------------
+    */
+   
+    /**
      * Relation to Group
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -49,8 +89,6 @@ class Product extends Model
         return $this->belongsTo(Group::class);
     }
 
-
-  
     /**
      * Relation to FeatureValue
      *
@@ -63,9 +101,14 @@ class Product extends Model
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Методы для работы со свойствами товара
+    |--------------------------------------------------------------------------
+    */ 
 
     /**
-     * 
+     * Получаем данные свойств товара для генерации формы
      * @return  array
      */
     public function getFormFeatures()
@@ -102,26 +145,15 @@ class Product extends Model
         return $fields;
     }
 
-
     /**
-     * @param $features
-     * @return  array of $ids
-     */
-    public function bindFeatureValues(array $features)
-    {
-          
-        return $this->featureValues()->sync($this->prepareFormFeatures($features));
-    }
-
-
-    /**
-     * @param $formFeatures
-     * @return  array of $ids
+     * Подготовка данных для синхронизации из request полей формы
+     * @param array $formFeatures
+     * @return array of $ids
      */
     protected function prepareFormFeatures(array $formFeatures)
     {
         
-        $sync = [];
+        $ids = [];
         $features = $this->group->features;
 
         foreach ($formFeatures as $feature_id => $values) {
@@ -129,24 +161,29 @@ class Product extends Model
                 switch ($features->find($feature_id)->type) {
                     case 'text':
                     case 'textarea':
-                        
-                        $featureValue = FeatureValue::updateOrCreate(
-                            ['id' => $feature_value_id],
-                            ['feature_id' => $feature_id, 'value' => $value]
-                        );
-
-                        if ($featureValue)
-                            $sync[] = $featureValue->id;
-                            
+                        $id = FeatureValue::findOrNew($feature_value_id)->saveOrDelete($feature_id, $value);    
+                        if ($id) 
+                            $ids[] = $id;
                     break;
                     default:
-                        $sync[] = $value; 
+                        $ids[] = $value; 
                     break;
                 }   
             }   
         }
 
-        return $sync;
+        return $ids;
+    }
+
+    /**
+     * Привязка идентификаторов значений свойтств(featureValues) товара 
+     * @param $features
+     * @return array
+     */
+    public function syncFeatures(array $features)
+    {
+          
+        return $this->featureValues()->sync($this->prepareFormFeatures($features));
     }
 
 
