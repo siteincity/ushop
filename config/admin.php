@@ -34,13 +34,12 @@ return [
     /*
      * Admin upload setting.
      */
-    'upload' => [
-        'disk' => 'admin',
-        'directory' => [
-            'image' => 'images',
-            'file' => 'files',
-        ],
-    ],
+    // 'upload' => [
+    //     'disk' => 'admin',
+    //     'directory' => [
+    //         'image' => 'images',
+    //     ],
+    // ],
 
     /*
      * Version.

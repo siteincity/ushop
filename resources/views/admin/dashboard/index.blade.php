@@ -11,16 +11,34 @@
 		<div class="card-body">
 			
 
-			{{ Form::open(['method'=>'GET', 'autocomplete' => 'off']) }}
+			{{ Form::open(['method'=>'GET', 'files' => 'true', 'autocomplete' => 'off']) }}
 
 			<pre>@php
 	
-	
+			//dd(Request::all());
+			// Storage::disk('public')->put('images/product/file.txt', '5555');
 
-				//dd(App\Product::find(1)->getFormFeatures());
-                
+			// dd(Storage::url('images/product/file.txt'));	
+            
+            print_r(Request::all());    
 
 			@endphp</pre>
+			
+
+
+			<div class="form-group" id="product-images">
+				<div class="apg-item" data-id="0">
+					<div class="apg-num">0</div>
+					@include('admin.widget.form.file', ['name' => 'images[0][file]'])
+					@include('admin.widget.form.text', ['name' => 'images[0][title]'])
+					<div class="item-preview"></div>
+					{{ Form::button('remove', ['type'=>'button','class' => 'btn btn-danger button-remove']) }}	
+				</div>
+				{{-- {{ Form::button('+', ['type'=>'button','class' => 'btn btn-default']) }} --}}
+			</div>
+
+
+
 
 
 			{{ Form::button('Сохранить', ['type'=>'submit','class' => 'btn btn-default']) }}
@@ -35,15 +53,20 @@
 @endsection
 
 
-
-
-@php
-
-	// $request = request()->all();
-	// if (!empty($request)) dd($request);
+{{-- JS:Code --}}
+@section('js')	
 	
+	<script>
+		$(function(){
+		
+			
+			$('#product-images').appProductGallery();
+			
 
-@endphp
+		})
+	</script>
+
+@endsection
 
 
 

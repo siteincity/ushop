@@ -49,26 +49,15 @@ class Product extends Model
 
     /**
      * this is a recommended way to declare event handlers
-     * 
      */
     protected static function boot() 
     {
         parent::boot();
 
-        // Событие перед удалением
-        // Дополнительно чистим значения характеристик типа [text|textarea] данного товара, 
-        // так как они НЕ являются опциями и используются только в качестве дополнительных свойств.
+        // Событие перед удалением модели:
         static::deleting(function($product) { 
-            $product->featureValues->each(function($value){
-                switch ($value->feature->type) {
-                    case 'text':
-                    case 'textarea':
-                        $value->delete();           
-                    break;
-                }   
-            });
-        });
-        
+            $product->beforeDelete();
+        });      
     }
 
 
@@ -184,6 +173,30 @@ class Product extends Model
     {
           
         return $this->featureValues()->sync($this->prepareFormFeatures($features));
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | События
+    |--------------------------------------------------------------------------
+    */ 
+   
+    /**
+     * Before delete model helper
+     */
+    protected function beforeDelete() 
+    {
+
+        // Дополнительно, чистим все значения характеристик не являющимися опциями товаров  
+        $this->featureValues->each(function($value){
+            switch ($value->feature->type) {
+                case 'text':
+                case 'textarea':
+                    $value->delete();           
+                break;
+            }   
+        });        
     }
 
 

@@ -65,8 +65,6 @@ class DatabaseSeeder extends Seeder
             ['feature_id' => '2', 'value' => '16'],
             ['feature_id' => '2', 'value' => '17'],
             ['feature_id' => '2', 'value' => '18'],
-            ['feature_id' => '3', 'value' => '15 грамм'],
-            ['feature_id' => '3', 'value' => '7 грамм'],
             ['feature_id' => '3', 'value' => '156 грамм'],
             ['feature_id' => '4', 'value' => 'Описание товара. Произвольный текст тут может быть'],
             ['feature_id' => '5', 'value' => 'Примечание, записка пользователя'],
@@ -78,15 +76,15 @@ class DatabaseSeeder extends Seeder
             ['product_id' => '1', 'feature_value_id' => '5'],
             ['product_id' => '1', 'feature_value_id' => '6'],
             ['product_id' => '1', 'feature_value_id' => '7'],
-            ['product_id' => '1', 'feature_value_id' => '10'],
+            ['product_id' => '1', 'feature_value_id' => '8'],
 
-            ['product_id' => '1', 'feature_value_id' => '11'],
-            ['product_id' => '1', 'feature_value_id' => '12'],
+            ['product_id' => '1', 'feature_value_id' => '9'],
+            ['product_id' => '1', 'feature_value_id' => '10'],
 
             ['product_id' => '2', 'feature_value_id' => '3'],
             ['product_id' => '2', 'feature_value_id' => '4'],
             ['product_id' => '2', 'feature_value_id' => '6'],
-            ['product_id' => '2', 'feature_value_id' => '11'],
+            ['product_id' => '2', 'feature_value_id' => '9'],
         ]);
         
         DB::table('feature_group')->insert([

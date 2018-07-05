@@ -53,7 +53,6 @@
 			<div class="tab-pane show active app-tab-pane" id="tab-features">
 				
 				@foreach ($features as $feature)
-					{{-- {{ dd($feature) }} --}}
 					<div class="form-group">
 
 						@include('admin.widget.form.label', ['name' => $feature['slug'], 'value' => $feature['caption']])
@@ -76,15 +75,7 @@
 					            ]) 
 						    @break
 
-						    {{-- @case('textarea')
-								@include('admin.widget.form.textarea', [
-					            	'name' => 'features[text]['.$feature['values']['id'].']',
-					            	'value' => $feature['values']['value'],
-					            ]) 
-						    @break --}}
-
 						    @default
-							    {{-- {{ dd($feature['values']['id']) }} --}}
 							    @include('admin.widget.form.text', [
 					            	'name' => 'features['.$feature['id'].']['.$feature['values']['id'].']',
 					            	'value' => $feature['values']['value'],
@@ -93,7 +84,6 @@
 						@endswitch
 
 					</div>
-
 				@endforeach
 				
 	

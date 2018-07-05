@@ -23,6 +23,22 @@ class Group extends Model
 
 
     /**
+     * this is a recommended way to declare event handlers
+     */
+    protected static function boot() 
+    {
+        parent::boot();
+
+        // Событие перед удалением модели:
+        static::deleting(function($group) { 
+            $group->products->each(function($product){              
+                $product->delete();                  
+            });
+        });   
+    }
+
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function products()
@@ -40,7 +56,6 @@ class Group extends Model
         
         return $this->belongsToMany(Feature::class);
     }
-
 
 
     /**

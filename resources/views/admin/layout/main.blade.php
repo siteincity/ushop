@@ -13,8 +13,9 @@
     <link href="vendor/admin-ui/css/bootstrap.css" rel="stylesheet" />
     <link href="vendor/admin-ui/css/font-awesome.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i&amp;subset=cyrillic" rel="stylesheet"> 
-    {{-- <link href="vendor/admin-ui/css/theme.material.css" rel="stylesheet" /> --}}
     <link href="vendor/select2/select2.css" rel="stylesheet" />
+    <link href="vendor/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
+
     @yield('css') 
     <link href="vendor/admin-ui/css/app.css" rel="stylesheet" />
 </head>
@@ -110,8 +111,9 @@
     <script src="vendor/admin-ui/js/jquery.js"></script>
     <script src="vendor/admin-ui/js/popper.js"></script>    
     <script src="vendor/admin-ui/js/bootstrap.js"></script>
-    {{-- <script src="vendor/admin-ui/js/theme.material.js"></script> --}}
     <script src="vendor/select2/select2.js"></script>
+    <script src="vendor/bootstrap-fileinput/js/fileinput.min.js"></script>
+
     <script src="vendor/admin-ui/js/app.js"></script>
     @yield('js')
 
