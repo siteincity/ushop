@@ -3,13 +3,8 @@ $.app = {};
 (function($){
 
 	$.appConfirm = function(content, options) {
-	  	
-		var settings = $.extend({
-			content: '',
-	    }, options);
- 		
- 		return confirm(content);
 
+ 		return confirm(content);
 	};
 
 })(jQuery);
@@ -43,78 +38,104 @@ $.app = {};
 
 
 
-(function($){
+// (function($){
 	
-	$.app.appProductGallery = {
-		init: function(options){ 
+// 	$.fn.appInputImage = function(options) {
+	  	
+// 		var settings = $.extend({
+
+// 	    	container: $('.preview')
+
+// 	    }, options);
+
+// 	  	this.on('change', function() {
+// 			if (this.files) {
+				
+// 	            for (i = 0; i < this.files.length; i++) {
+// 	            	var file = this.files[i];
+// 	                var reader = new FileReader();
+// 	                reader.onload = function(e) {
+// 	                    var image = '<img src="'+e.target.result+'" data-name="'+file.name+'" alt=""/>';
+// 	                    settings.container.html(image);  
+// 	                }
+// 	                reader.readAsDataURL(file);
+// 	            }
+
+// 		    }
+// 	    })
+
+// 	};
+	
+// 	$.app.appProductGallery = {
+// 		init: function(options){ 
 			
-			return this.each(function(){
-				
-				var _this = $.app.appProductGallery;
-				var element = $(this);
-				var id = 0;
+// 			var settings = $.extend({
 
-				_this.setActions($(this).find('.apg-item'));	
+// 	    	}, options);
+
+// 			return this.each(function(){
 				
-				_this.buttonAdd().on('click', function(){
-					var item = _this.makeItem(id).appendTo(element);
-					_this.setActions(item);
-					id = _this.setNext(id);
-				}).prependTo(element);
+// 				var _this = $.app.appProductGallery;
+// 				var element = $(this);
+// 				var id = 0;
+
+// 				_this.makeItem(id).remove('.button-remove').appendTo(element);
+// 				_this.setActions($(this).find('.apg-item'));	
+				
+// 				_this.buttonAdd().on('click', function(){
+// 					var item = _this.makeItem(id).appendTo(element);
+// 					_this.setActions(item);
+// 					id = _this.setNext(id);
+// 				}).appendTo($(this).find('.apg-item'));
 	
-			})
+// 			})
 
-		},
-		makeItem: function(id){
-			var num = $('<div/>', {class: 'apg-num'}).text(id);
-			var item = $('<div/>', {class: 'apg-item', 'data-id': id});
-			var inputFile = $('<input/>', {class: 'form-control app-input__file', type: 'file', name: 'images['+id+'][image]'});
-			var inputText = $('<input/>', {class: 'form-control app-input__text', type: 'text', name: 'images['+id+'][title]'});
-			var preview = $('<div/>', {class: 'item-preview'});
-			var buttonRemove = $('<button/>', {class: 'btn btn-danger button-remove', type: 'button'}).text('remove');
-			item.append(inputFile).append(inputText).append(preview).append(buttonRemove).append(num);
-			return item;
-		},
-		setActions: function(item){
-			item.find('input[type="file"]').appInputImage({
-				container: item.find('.item-preview')
-			});
-			item.find('.button-remove').on('click',function(){
-				item.remove();	
-			});
-			return item;
-		},
-		setNext: function(id){ 
-			return id + 1;
-		},
-		buttonAdd: function(id){ 
-			return $('<button/>', {class: 'btn btn-default api-button-add', type: 'button'}).text('add');
-		},
-	};
+// 		},
+// 		makeItem: function(id){
+// 			var item = $('<div/>', {class: 'apg-item form-group', 'data-id': id});
+// 			var inputFile = $('<input/>', {class: 'form-control app-input__file', type: 'file', name: 'images['+id+'][image]'});
+// 			var inputText = $('<input/>', {class: 'form-control app-input__text', type: 'text', name: 'images['+id+'][title]'});
+// 			var preview = $('<div/>', {class: 'item-preview'});
+// 			var buttonRemove = $('<button/>', {class: 'app-btn btn button-remove btn-sm btn-danger', type: 'button'}).html('<i class="fa fa-minus-circle"></i>');
 
-	$.fn.appProductGallery = function(method) {
-		if ($.app.appProductGallery[method]) {
-			return $.app.appProductGallery[method].apply(this, Array.prototype.slice.call(arguments, 1));
-		} else if (typeof method === 'object' || !method) {
-			return $.app.appProductGallery.init.apply(this, arguments);
-		} else {
-			$.error('Метод ' +  method + ' в jQuery.appProductGallery не существует');
-		}   
-	};
+// 			return item.append([inputFile, inputText, preview, buttonRemove]);
+// 		},
+// 		setActions: function(item){
+// 			item.find('input[type="file"]').appInputImage({
+// 				container: item.find('.item-preview')
+// 			});
+// 			item.find('.button-remove').on('click',function(){
+// 				item.remove();	
+// 			});
+// 			return item;
+// 		},
+// 		setNext: function(id){ 
+// 			return id + 1;
+// 		},
+// 		buttonAdd: function(){ 
+// 			return $('<button/>', {class: 'btn btn-success button-add btn-sm', type: 'button'}).html('<i class="fa fa-plus-circle"></i>');
+// 		},
+// 	};
 
-})(jQuery);
+// 	$.fn.appProductGallery = function(method) {
+// 		if ($.app.appProductGallery[method]) {
+// 			return $.app.appProductGallery[method].apply(this, Array.prototype.slice.call(arguments, 1));
+// 		} else if (typeof method === 'object' || !method) {
+// 			return $.app.appProductGallery.init.apply(this, arguments);
+// 		} else {
+// 			$.error('Метод ' +  method + ' в jQuery.appProductGallery не существует');
+// 		}   
+// 	};
+
+// })(jQuery);
 
 
 (function($){
-
+	
 	$.fn.appInputImage = function(options) {
 	  	
 		var settings = $.extend({
-
-	    	container: $('.preview'),
-	    	before: function(){},
-	    	success: function(){}
-
+	    	container: {}
 	    }, options);
 
 	  	this.on('change', function() {
@@ -133,6 +154,33 @@ $.app = {};
 		    }
 	    })
 
+	};
+	
+	$.app.appProductGallery = {
+		init: function(options){ 
+			
+			var settings = $.extend({
+
+	    	}, options);
+
+			return this.each(function(){
+				
+				
+	
+			})
+
+		},
+		
+	};
+
+	$.fn.appProductGallery = function(method) {
+		if ($.app.appProductGallery[method]) {
+			return $.app.appProductGallery[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || !method) {
+			return $.app.appProductGallery.init.apply(this, arguments);
+		} else {
+			$.error('Метод ' +  method + ' в jQuery.appProductGallery не существует');
+		}   
 	};
 
 })(jQuery);

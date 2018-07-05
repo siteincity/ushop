@@ -22,7 +22,10 @@
 				<a class="nav-link app-nav-link" data-toggle="tab" href="#tab-description">Общее</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link app-nav-link active" data-toggle="tab" href="#tab-features">Характеристики</a>
+				<a class="nav-link app-nav-link" data-toggle="tab" href="#tab-features">Свойства</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link app-nav-link active" data-toggle="tab" href="#tab-media">Медиа</a>
 			</li>
 		</ul>
 
@@ -50,7 +53,7 @@
 			</div>
 
 			{{-- Tab:features --}}
-			<div class="tab-pane show active app-tab-pane" id="tab-features">
+			<div class="tab-pane app-tab-pane" id="tab-features">
 				
 				@foreach ($features as $feature)
 					<div class="form-group">
@@ -86,11 +89,64 @@
 					</div>
 				@endforeach
 				
-	
+			</div>
+
+			{{-- Tab:images --}}	
+			<div class="tab-pane show active app-tab-pane" id="tab-media">	
+
+				{{ Form::label(null, 'Галерея') }}
+				<div class="app-form-product-gallery" id="product-images">
+
+					{{-- 
+						<div class="col-xl-3">
+							<div class="card">
+								<div class="card-header">
+									@include('admin.widget.form.text', ['name' => 'images[0][title]'])
+								</div>
+								<div class="card-body text-center">
+									<img class="img-fluid" src="storage/images/4.png">	
+								</div>
+								@include('admin.widget.form.file', ['name' => 'images[0][file]'])	
+							</div>
+						</div> --}}
+						
+					{{-- <div class="row align-items-center app-form-product-gallery__item">
+						<div class="col-xl-3">
+							<img class="img-fluid" src="storage/images/4.png">		
+						</div>
+						<div class="col-xl-9">
+							<div class="form-group">
+								@include('admin.widget.form.text', ['name' => 'images[0][title]'])	
+							</div>
+							<div class="form-group">
+								@include('admin.widget.form.file', ['name' => 'images[0][file]'])								
+							</div>
+						</div>
+					</div> --}}
+					
+					<div class="row">
+						<div class="col-xl-3">
+							<div class="card">
+								<div class="card-header">
+									@include('admin.widget.form.text', ['name' => 'images[0][title]'])
+								</div>
+								<div class="card-body text-center">
+									<img class="img-fluid" src="storage/images/4.png">	
+								</div>
+								@include('admin.widget.form.file', ['name' => 'images[0][file]'])	
+							</div>
+						</div>
+					</div>
+					
+						
+					
+											
+				</div>		
+				
 			</div>
 
 
-			{{-- Form:control:bottom --}}
+			{{-- Form:control:bottom
 			<div class="container-fluid">
 				<div class="btn-group btn-group-md">
 					{{ Form::button('Сохранить', ['type'=>'submit','class' => 'btn btn-default']) }}	
@@ -139,6 +195,8 @@
 				var group_id = $(this).val();
 				window.location.href = _current_url + '?group_id=' + group_id;
 			})
+
+			$('#product-images').appProductGallery();
 
 		})
 	</script>
